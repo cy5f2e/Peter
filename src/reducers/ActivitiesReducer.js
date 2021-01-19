@@ -1,7 +1,8 @@
 const initState = [
   {
     id: 1,
-    name: 'peter',
+    name: 'apple',
+    count: '5',
   },
 ];
 
