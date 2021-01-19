@@ -1,12 +1,28 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { List, Button, Segment } from 'semantic-ui-react';
 
 const Activity = (props) => {
+  const { name, count } = props;
+  const dispatch = useDispatch();
+
+  const handleDeleteActivity = () => {
+    dispatch({
+      type: 'DELETE_ACTIVITY',
+      payload: {
+        id: props.id,
+      },
+    });
+  };
+
   return (
-    <div>
-      <p>Order: {props.name}</p>
-      <p>Count: {props.count}</p>
-      <button>Delete</button>
-    </div>
+    <Segment>
+      <List>
+        <List.Item content={`Order: ${name}`} />
+        <List.Item content={`Count: ${count}`} />
+      </List>
+      <Button content="Delete Activity" onClick={handleDeleteActivity} />
+    </Segment>
   );
 };
 

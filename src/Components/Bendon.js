@@ -1,16 +1,27 @@
-import React from 'react';
-import Activity from './Activity';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Button } from 'semantic-ui-react';
+import Activity from './Activity';
+import AddActivity from './AddActivity';
 
 const Bendon = () => {
-  const state = useSelector((state) => state);
-  console.log("🔍  >  state", state)
+  const allActivities = useSelector((state) => state.activities);
+  const [add, setAdd] = useState(false);
 
   return (
     <>
-      <h2>Bendon List</h2>
-      <button>Add Activity</button>
-      <Activity />
+      <Button content="Add Activity" onClick={() => setAdd(!add)} />
+      <br />
+      {add && <AddActivity />}
+      <br />
+      {allActivities.map((activity) => (
+        <Activity
+          key={activity.id}
+          id={activity.id}
+          name={activity.name}
+          count={activity.count}
+        />
+      ))}
     </>
   );
 };

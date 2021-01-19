@@ -1,11 +1,12 @@
 import React from 'react';
+import { Header } from 'semantic-ui-react';
 import Bendon from './Components/Bendon';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>訂便當 2.0</h1>
+      <Header as="h1">團購 sample</Header>
       <Bendon />
     </div>
   );
