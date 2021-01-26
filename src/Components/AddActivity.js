@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Form } from 'semantic-ui-react';
+import { Form, Segment } from 'semantic-ui-react';
+import { UpdateProduct } from '../actions/ProductActions';
 
-const AddActivity = () => {
+const AddActivity = (props) => {
+  const { onClose } = props;
   const dispatch = useDispatch();
   const [data, setData] = useState({});
 
@@ -14,29 +16,30 @@ const AddActivity = () => {
   };
 
   const handleAddActivity = () => {
-    dispatch({
-      type: 'CREATE_ACTIVITY',
-      payload: {
-        name: data.name,
-        count: data.count,
-      },
-    });
+    dispatch(UpdateProduct(data.name, data.price));
+    setData({});
+
+    setTimeout(() => {
+      onClose();
+    }, 800);
   };
 
   return (
-    <Form sie="small">
-      <Form.Input
-        label="Order Name"
-        name="name"
-        onChange={handleChange}
-      />
-      <Form.Input
-        label="Order Count"
-        name="count"
-        onChange={handleChange}
-      />
-      <Form.Button content="ok" onClick={handleAddActivity} />
-    </Form>
+    <Segment>
+      <Form size="small">
+        <Form.Input
+          label="品名"
+          name="name"
+          onChange={handleChange}
+        />
+        <Form.Input
+          label="價格"
+          name="price"
+          onChange={handleChange}
+        />
+        <Form.Button content="送出" onClick={handleAddActivity} />
+      </Form>
+    </Segment>
   );
 };
 
